@@ -49,5 +49,29 @@
       </templates>
     </bookmarks>
   </templateSets>
+    <modules jcr:primaryType="jnt:modules">
+        <bookmarks j:dependencies="default profile skins default-skins" j:installedModules="bookmarks" j:siteType="profileModule" j:title="My Space - My Bookmarks" j:wcagCompliance="true" jcr:primaryType="jnt:virtualsite">
+            <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
+                <dashboard-modules-base j:view="dashboard"
+                                        jcr:mixinTypes="jmix:useUILocale"
+                                        jcr:primaryType="jnt:template">
+                    <favorites j:applyOn="jnt:user"
+                               j:defaultTemplate="false"
+                               j:titleKey="jnt_currentUserBookmarks"
+                               jcr:mixinTypes="jmix:rbTitle"
+                               j:hiddenTemplate="false"
+                               jcr:primaryType="jnt:contentTemplate">
+                        <pagecontent jcr:primaryType="jnt:contentList">
+                            <currentUserBookmarks jcr:primaryType="jnt:currentUserBookmarks"
+                                                  numberOfBookmarksPerPage="10"
+                                                  jcr:mixinTypes="jmix:renderable"
+                                                  j:view="bootstrapBookmarks">
+                            </currentUserBookmarks>
+                        </pagecontent>
+                    </favorites>
+                </dashboard-modules-base>
+            </templates>
+        </bookmarks>
+    </modules>
 </content>
 
