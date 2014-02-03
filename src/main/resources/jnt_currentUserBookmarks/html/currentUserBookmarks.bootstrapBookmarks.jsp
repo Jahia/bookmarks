@@ -28,11 +28,11 @@
 <template:addResources>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(":file").filestyle({classButton: "btn",classIcon: "icon-folder-open"/*,buttonText:"Translation"*/});
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
+
+            $(document).ready(function () {
+                $(":file").filestyle({classButton: "btn",classIcon: "icon-folder-open"/*,buttonText:"Translation"*/});
+            });
+
             $('#bookmarks_table').dataTable({
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "iDisplayLength":10,
@@ -40,6 +40,12 @@
                 "aaSorting": [] //this option disable sort by default, the user steal can use column names to sort the table
             });
         });
+
+        function deleteBookmark(source) {
+            $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},function(result) {
+                $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
+            },'json');
+        }
     </script>
 </template:addResources>
 
@@ -72,7 +78,8 @@
             $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
         </script>
     </c:if>
-        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="bookmarks_table">
+    <fieldset class="well">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-hover table-bordered" id="bookmarks_table">
             <thead>
             <tr>
                 <th><fmt:message key='label.name'/></th>
@@ -85,4 +92,5 @@
                 <%@include file="bookmarksTableRow.jspf" %>
             </tbody>
         </table>
+    </fieldset>
 </div>

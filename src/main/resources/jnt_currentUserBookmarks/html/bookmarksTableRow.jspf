@@ -1,11 +1,4 @@
 <c:if test="${currentResource.workspace ne 'default'}">
-    <script type="text/javascript">
-        function deleteBookmark(source) {
-            $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},function(result) {
-            $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
-            },'json');
-        }
-    </script>
     <c:if test="${moduleMap.listTotalSize eq 0}">
         <fmt:message key="bookmark.emptyResults"/>
     </c:if>
@@ -28,6 +21,9 @@
                             <fmt:message key="label.delete"/>
                         </button>
                         <div class="clear"></div>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             </c:forEach>
