@@ -12,18 +12,17 @@
                         &nbsp;
                     </td>
                     <td>
+                        ${bookmark.properties['site'].string}
+                    </td>
+                    <td>
                         <span class="small">&nbsp;<fmt:formatDate
                                 value="${bookmark.properties['date'].date.time}" dateStyle="short" type="both"/></span>
                     </td>
                     <td>
-                        <button class="btn btn-danger" onclick="deleteBookmark('${bookmark.path}')">
-                            <i class="icon-remove icon-white"></i>
-                            <fmt:message key="label.delete"/>
-                        </button>
-                        <div class="clear"></div>
-                    </td>
-                    <td>
-
+                        <a href="#" onclick="deleteBookmark('${bookmark.path}')">
+                        <img src="/icons/delete.png" width="16" height="16" alt=" " role="presentation"
+                             style="position:relative; top: 4px; margin-right:2px; "/>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

@@ -23,6 +23,8 @@
 <template:addResources type="javascript" resources="jquery.min.js,admin-bootstrap.js,jquery.blockUI.js,bootstrap-filestyle.min.js,jquery.metadata.js,workInProgress.js"/>
 <template:addResources type="javascript" resources="datatables/jquery.dataTables.js,i18n/jquery.dataTables-${currentResource.locale}.js,datatables/dataTables.bootstrap-ext.js"/>
 <template:addResources type="css" resources="admin-bootstrap.css,datatables/css/bootstrap-theme.css,tablecloth.css"/>
+<template:addResources type="css" resources="bookmarks.css"/>
+<template:addResources type="javascript" resources="ajaxreplace.js"/>
 <fmt:message key="label.workInProgressTitle" var="i18nWaiting"/><c:set var="i18nWaiting" value="${functions:escapeJavaScript(i18nWaiting)}"/>
 
 <template:addResources>
@@ -42,17 +44,13 @@
         });
 
         function deleteBookmark(source) {
-            $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},function(result) {
+            $.post('<c:url value='${url.base}${renderContext.user.localPath}.delete.do'/>', {bookPathDel:source},function(result) {
                 $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
             },'json');
         }
     </script>
 </template:addResources>
 
-<template:include view="hidden.header"/>
-<template:addResources type="css" resources="bookmarks.css"/>
-<template:addResources type="javascript" resources="jquery.min.js"/>
-<template:addResources type="javascript" resources="ajaxreplace.js"/>
 <c:set var="user" value="${uiComponents:getBindedComponent(currentNode, renderContext, 'j:bindedComponent')}"/>
 
 <c:if test="${empty user or not jcr:isNodeType(user, 'jnt:user')}">
@@ -68,9 +66,13 @@
     </c:if>
 </c:forEach>
 <c:set target="${moduleMap}" property="pagerUrl" value="${param.pagerUrl}"/>
-<template:include view="hidden.header"/>
+
+
 <div id="bookmarkList${user.identifier}">
+    <template:include view="hidden.header"/>
+
     <template:initPager totalSize="${moduleMap.end}" pageSize="${currentNode.properties['numberOfBookmarksPerPage'].string}" id="${renderContext.mainResource.node.identifier}"/>
+
     <template:displayPagination id="${renderContext.mainResource.node.identifier}"/>
 
     <c:if test="${currentResource.workspace eq 'default'}">
@@ -85,7 +87,7 @@
                 <th><fmt:message key='label.name'/></th>
                 <th><fmt:message key='label.site'/></th>
                 <th><fmt:message key='label.created'/></th>
-                <th><fmt:message key='mix_created'/></th>
+                <th><fmt:message key='label.delete'/></th>
             </tr>
             </thead>
             <tbody>
@@ -93,4 +95,7 @@
             </tbody>
         </table>
     </fieldset>
+
+    <p>${moduleMap}</p>
+
 </div>
