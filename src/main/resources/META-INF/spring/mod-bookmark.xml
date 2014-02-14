@@ -6,8 +6,4 @@
         <property name="name" value="add"/>
         <property name="contentManager" ref="ContentManagerHelper"/>
     </bean>
-    <bean class="org.jahia.modules.bookmarks.DeleteAction">
-        <property name="name" value="delete"/>
-        <property name="contentManager" ref="ContentManagerHelper"/>
-    </bean>
 </beans>

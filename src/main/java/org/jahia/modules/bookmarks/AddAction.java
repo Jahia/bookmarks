@@ -81,11 +81,10 @@ public class AddAction extends Action {
             userBookmarks.saveSession();
         }
         if (userBookmarks != null &&  !contentManager.checkExistence(userBookmarks.getPath() + "/" + req.getParameter("jcr:title").replace(" ","-"), jcrSessionWrapper, Locale.getDefault())) {
-            JCRNodeWrapper bookmark = contentManager.addNode(userBookmarks, req.getParameter("jcr:title"), "jnt:bookmark", null, null, Locale.getDefault());
+            JCRNodeWrapper bookmark = contentManager.addNode(userBookmarks, req.getParameter("jcr:title").replace(" ","-"), "jnt:bookmark", null, null, Locale.getDefault());
             bookmark.setProperty("date", new GregorianCalendar());
             if (req.getParameter("url") != null) { bookmark.setProperty("url", req.getParameter("url")); }
             bookmark.setProperty("jcr:title", req.getParameter("jcr:title"));
-            bookmark.setProperty("site", urlResolver.getSiteKeyByServerName());
             bookmark.saveSession();
         }
         return new ActionResult(HttpServletResponse.SC_OK, null, new JSONObject());

@@ -16,7 +16,7 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <c:if test="${renderContext.loggedIn}" >
-<form action="<c:url value='${url.base}${renderContext.user.localPath}.add.do'/>" method="post" name="bookmark" id="bookmarkForm">
+<form action="<c:url value='${url.baseLive}${renderContext.user.localPath}.add.do'/>" method="post" name="bookmark" id="bookmarkForm">
     <p>
         <jcr:node path="${renderContext.user.localPath}" var="user" />
 

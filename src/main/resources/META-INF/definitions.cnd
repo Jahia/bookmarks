@@ -5,7 +5,6 @@
 [jnt:bookmark] > jnt:content, mix:title
 - url (string) indexed=no
 - date (date)
-- site (string)
 
 [jnt:bookmarks] > jnt:content, mix:title
  orderable
