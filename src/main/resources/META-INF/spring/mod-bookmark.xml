@@ -5,6 +5,9 @@
     <bean class="org.jahia.modules.bookmarks.AddAction">
         <property name="name" value="add"/>
         <property name="contentManager" ref="ContentManagerHelper"/>
-        <property name="urlResolverFactory" ref="urlResolverFactory"/>
+    </bean>
+    <bean class="org.jahia.modules.bookmarks.DeleteAction">
+        <property name="name" value="delete"/>
+        <property name="contentManager" ref="ContentManagerHelper"/>
     </bean>
 </beans>

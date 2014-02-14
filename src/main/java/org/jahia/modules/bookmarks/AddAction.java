@@ -49,13 +49,11 @@ import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
 import org.jahia.services.render.URLResolver;
-import org.jahia.services.render.URLResolverFactory;
 import org.json.JSONObject;
 
 import javax.jcr.PathNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -65,19 +63,17 @@ import java.util.*;
  */
 public class AddAction extends Action {
     private ContentManagerHelper contentManager;
-    private URLResolverFactory urlResolverFactory;
     final String bookmarkPath = "bookmarks";
+
+    public void setContentManager(ContentManagerHelper contentManager) {
+        this.contentManager = contentManager;
+    }
 
     public ActionResult doExecute(HttpServletRequest req, RenderContext renderContext, Resource resource, JCRSessionWrapper session, Map<String, List<String>> parameters, URLResolver urlResolver) throws Exception {
         // test if bookmark node is present
         JCRSessionWrapper jcrSessionWrapper = JCRSessionFactory.getInstance().getCurrentUserSession(resource.getWorkspace(), resource.getLocale());
         JCRNodeWrapper userBookmarks = null;
         String userPath = renderContext.getUser().getLocalPath();
-
-        URL url = new URL(req.getParameter("url"));
-
-        URLResolver urlResolverP = urlResolverFactory.createURLResolver("/cms/live/en" + url.getPath(), req.getServerName(), renderContext.getWorkspace(), req);
-
         try {
             userBookmarks = jcrSessionWrapper.getNode(userPath + "/" + bookmarkPath);
         } catch (PathNotFoundException pnf) {
@@ -89,17 +85,9 @@ public class AddAction extends Action {
             bookmark.setProperty("date", new GregorianCalendar());
             if (req.getParameter("url") != null) { bookmark.setProperty("url", req.getParameter("url")); }
             bookmark.setProperty("jcr:title", req.getParameter("jcr:title"));
-            bookmark.setProperty("site", urlResolverP.getNode().getResolveSite().getServerName());
+            bookmark.setProperty("site", urlResolver.getSiteKeyByServerName());
             bookmark.saveSession();
         }
         return new ActionResult(HttpServletResponse.SC_OK, null, new JSONObject());
-    }
-
-    public void setContentManager(ContentManagerHelper contentManager) {
-        this.contentManager = contentManager;
-    }
-
-    public void setUrlResolverFactory(URLResolverFactory urlResolverFactory) {
-        this.urlResolverFactory = urlResolverFactory;
     }
 }
