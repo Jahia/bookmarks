@@ -26,6 +26,7 @@
 <template:addResources type="css" resources="bookmarks.css"/>
 <template:addResources type="javascript" resources="ajaxreplace.js"/>
 <fmt:message key="label.workInProgressTitle" var="i18nWaiting"/><c:set var="i18nWaiting" value="${functions:escapeJavaScript(i18nWaiting)}"/>
+<c:set var="user" value="${uiComponents:getBindedComponent(currentNode, renderContext, 'j:bindedComponent')}"/>
 
 <template:addResources>
     <script type="text/javascript">
@@ -42,16 +43,13 @@
                 "aaSorting": [] //this option disable sort by default, the user steal can use column names to sort the table
             });
         });
-
         function deleteBookmark(source) {
-            $.post('<c:url value='${url.base}${renderContext.user.localPath}.delete.do'/>', {bookPathDel:source},function(result) {
-                $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
+            $.post('<c:url value="${url.baseLive}"/>' + source, {"jcrMethodToCall":"delete"},function(result) {
+                $('#bookmarkList${user.identifier}').load('<c:url value="${url.base}${currentNode.path}.html.ajax${ps}"/>');
             },'json');
         }
     </script>
 </template:addResources>
-
-<c:set var="user" value="${uiComponents:getBindedComponent(currentNode, renderContext, 'j:bindedComponent')}"/>
 
 <c:if test="${empty user or not jcr:isNodeType(user, 'jnt:user')}">
     <jcr:node var="user" path="${renderContext.user.localPath}"/>
