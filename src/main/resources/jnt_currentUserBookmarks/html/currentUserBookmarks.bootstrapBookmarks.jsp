@@ -45,7 +45,7 @@
         });
         function deleteBookmark(source) {
             $.post('<c:url value="${url.baseLive}"/>' + source, {"jcrMethodToCall":"delete"},function(result) {
-                $('#bookmarkList${user.identifier}').load('<c:url value="${url.base}${currentNode.path}.html.ajax${ps}"/>');
+                $("#bookmarkList").parent().load('<c:url value="${url.base}${currentNode.path}.html.ajax${ps}?includeJavascripts=false&userUuid=${user.identifier}"/>');
             },'json');
         }
     </script>
@@ -66,7 +66,7 @@
 <c:set target="${moduleMap}" property="pagerUrl" value="${param.pagerUrl}"/>
 
 
-<div id="bookmarkList${user.identifier}">
+<div id="bookmarkList">
     <template:include view="hidden.header"/>
 
     <template:initPager totalSize="${moduleMap.end}" pageSize="${currentNode.properties['numberOfBookmarksPerPage'].string}" id="${renderContext.mainResource.node.identifier}"/>
@@ -93,7 +93,4 @@
             </tbody>
         </table>
     </fieldset>
-
-    <p>${moduleMap}</p>
-
 </div>
