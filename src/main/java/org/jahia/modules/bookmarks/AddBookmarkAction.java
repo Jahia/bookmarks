@@ -41,8 +41,8 @@
 package org.jahia.modules.bookmarks;
 
 import org.jahia.ajax.gwt.helper.ContentManagerHelper;
-import org.jahia.bin.ActionResult;
 import org.jahia.bin.Action;
+import org.jahia.bin.ActionResult;
 import org.jahia.services.content.JCRNodeWrapper;
 import org.jahia.services.content.JCRSessionFactory;
 import org.jahia.services.content.JCRSessionWrapper;
@@ -54,14 +54,17 @@ import org.json.JSONObject;
 import javax.jcr.PathNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * User: david
  * Date: May 12, 2010
  * Time: 4:06:46 PM
  */
-public class AddAction extends Action {
+public class AddBookmarkAction extends Action {
     private ContentManagerHelper contentManager;
     final String bookmarkPath = "bookmarks";
 
@@ -77,16 +80,23 @@ public class AddAction extends Action {
         try {
             userBookmarks = jcrSessionWrapper.getNode(userPath + "/" + bookmarkPath);
         } catch (PathNotFoundException pnf) {
-            userBookmarks =  contentManager.addNode(jcrSessionWrapper.getNode(userPath), bookmarkPath, "jnt:bookmarks", null, null,Locale.getDefault());
+            userBookmarks = contentManager.addNode(jcrSessionWrapper.getNode(userPath), bookmarkPath, "jnt:bookmarks", null, null,Locale.getDefault());
             userBookmarks.saveSession();
         }
+
+        JSONObject result = new JSONObject();
         if (userBookmarks != null &&  !contentManager.checkExistence(userBookmarks.getPath() + "/" + req.getParameter("jcr:title").replace(" ","-"), jcrSessionWrapper, Locale.getDefault())) {
             JCRNodeWrapper bookmark = contentManager.addNode(userBookmarks, req.getParameter("jcr:title").replace(" ","-"), "jnt:bookmark", null, null, Locale.getDefault());
             bookmark.setProperty("date", new GregorianCalendar());
             if (req.getParameter("url") != null) { bookmark.setProperty("url", req.getParameter("url")); }
             bookmark.setProperty("jcr:title", req.getParameter("jcr:title"));
             bookmark.saveSession();
+
+            result.put("isNew", true);
+        }else {
+            result.put("isNew", false);
         }
-        return new ActionResult(HttpServletResponse.SC_OK, null, new JSONObject());
+
+        return new ActionResult(HttpServletResponse.SC_OK, null, result);
     }
 }
