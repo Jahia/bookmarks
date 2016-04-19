@@ -85,7 +85,6 @@
         <configuration>
           <instructions>
             <Jahia-Depends>default,profile,skins,default-skins</Jahia-Depends>
-            <Jahia-Module-Type>profileModule</Jahia-Module-Type>
           </instructions>
         </configuration>
       </plugin>

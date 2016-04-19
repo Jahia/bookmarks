@@ -4,7 +4,7 @@
         <bookmarks j:dependencies="default default-skins profile skins"
                  j:installedModules="bookmarks"
                  j:modulePriority="0"
-                 j:moduleType="profileModule"
+                 j:moduleType="module"
                  j:title="My Space - My Bookmarks"
                  jcr:primaryType="jnt:module">
                 
