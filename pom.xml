@@ -52,7 +52,7 @@
     <version>7.2.0.0</version>
   </parent>
   <artifactId>bookmarks</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>Jahia My Bookmarks</name>
   <description>These are the custom module (Jahia My Bookmarks) for running on a Jahia server.</description>
@@ -60,7 +60,7 @@
     <connection>scm:git:git@github.com:Jahia/bookmarks.git</connection>
     <developerConnection>scm:git:git@github.com:Jahia/bookmarks.git</developerConnection>
     <url>scm:git:git@github.com:Jahia/bookmarks.git</url>
-    <tag>2_1_1</tag>
+    <tag>HEAD</tag>
   </scm>
   <repositories>
     <repository>
