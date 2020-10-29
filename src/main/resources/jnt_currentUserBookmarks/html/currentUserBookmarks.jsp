@@ -72,7 +72,7 @@
                 function deleteBookmark(source) {
                     $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},
                         function(result) {
-                            $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
+                            $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax"/>${ps}');
                         },'json');
                 }
 
