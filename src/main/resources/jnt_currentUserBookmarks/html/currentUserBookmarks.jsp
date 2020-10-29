@@ -48,15 +48,6 @@
     </c:if>
 
     <c:if test="${currentResource.workspace ne 'default'}">
-        <script type="text/javascript">
-            function deleteBookmark(source) {
-                $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},
-                        function(result) {
-                            $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
-                        },'json');
-            }
-        </script>
-        
         <c:if test="${moduleMap.listTotalSize eq 0}">
             <fmt:message key="bookmark.emptyResults"/>
         </c:if>
@@ -70,14 +61,30 @@
                         &nbsp;<span class="small">&nbsp;<fmt:formatDate
                             value="${bookmark.properties['date'].date.time}" dateStyle="short" type="both"/></span>
                         <div class="floatright">
-                            &nbsp;<button onclick="deleteBookmark('${bookmark.path}')">
+                            &nbsp;<button class="deleteBookmark" id="${bookmark.path}">
                             <span class="icon-contribute icon-delete"></span><fmt:message key="label.delete"/></button>
                         </div>
                         <div class="clear"></div>
                     </li>
                 </c:forEach>
             </ul>
+            <script type="text/javascript">
+                function deleteBookmark(source) {
+                    $.post('<c:url value="${url.base}"/>' + source, {"jcrMethodToCall":"delete"},
+                        function(result) {
+                            $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${currentNode.path}.html.ajax${ps}"/>');
+                        },'json');
+                }
+
+                $(document).ready(function() {
+                    var bookMarks = document.getElementsByClassName("deleteBookmark");
+                    for (var i = 0; i < bookMarks.length; i++) {
+                        bookMarks[i].addEventListener("click", function(e) {
+                            deleteBookmark(e.target.id);
+                        });
+                    }
+                });
+            </script>
         </c:if>
     </c:if>
-
 </div>
