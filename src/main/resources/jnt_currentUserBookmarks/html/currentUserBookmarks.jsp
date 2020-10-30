@@ -80,7 +80,7 @@
                     var bookMarks = document.getElementsByClassName("deleteBookmark");
                     for (var i = 0; i < bookMarks.length; i++) {
                         bookMarks[i].addEventListener("click", function(e) {
-                            deleteBookmark(e.target.id);
+                            deleteBookmark(e.currentTarget.id);
                         });
                     }
                 });
