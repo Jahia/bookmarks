@@ -1,0 +1,15 @@
+{
+  "target": "profiles",
+  "multivalued": true,
+  "type": "string",
+  "metadata": {
+    "readOnly": false,
+    "systemTags": [
+      "hasCardDataTag",
+      "cardDataTag/_bookmarks/2.1/Bookmarks",
+      "positionInCard.1"
+    ],
+    "id": "bookmarks",
+    "name": "Bookmarks"
+  }
+}

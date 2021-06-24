@@ -1,113 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
-    <modules jcr:primaryType="jnt:modules">
-        <bookmarks j:dependencies="default default-skins profile skins"
+   <modules jcr:primaryType="jnt:modules">
+      <bookmarks j:dependencies="default default-skins profile skins"
                  j:installedModules="bookmarks"
                  j:modulePriority="0"
                  j:moduleType="module"
                  j:title="My Space - My Bookmarks"
                  jcr:primaryType="jnt:module">
-                
-                <portlets jcr:primaryType="jnt:portletFolder"/>
-                <files jcr:primaryType="jnt:folder"/>
-      <contents jcr:primaryType="jnt:contentFolder">
-        <profile-page-items jcr:primaryType="jnt:contentFolder">
-                        <j:translation_en jcr:language="en"
+         <portlets jcr:primaryType="jnt:portletFolder"/>
+         <files jcr:primaryType="jnt:folder"/>
+         <contents jcr:primaryType="jnt:contentFolder">
+            <profile-page-items jcr:primaryType="jnt:contentFolder">
+               <j:translation_en jcr:language="en"
                                  jcr:mixinTypes="mix:title"
                                  jcr:primaryType="jnt:translation"
                                  jcr:title="Profile Page Items"/>
-                        <bookmarks divClass="user-bookmarks"
+               <bookmarks divClass="user-bookmarks"
                           jcr:primaryType="jnt:componentLink"
                           targetTemplate="user-bookmarks">
-                            <j:translation_en jcr:language="en"
+                  <j:translation_en jcr:language="en"
                                     jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="My Bookmarks"/>
-                            <j:translation_fr jcr:language="fr"
+                  <j:translation_fr jcr:language="fr"
                                     jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="Mes Bookmarks"/>
-          </bookmarks>
-        </profile-page-items>
-        <portal-components jcr:primaryType="jnt:contentFolder">
-                        <j:translation_en jcr:language="en"
+               </bookmarks>
+            </profile-page-items>
+            <portal-components jcr:primaryType="jnt:contentFolder">
+               <j:translation_en jcr:language="en"
                                  jcr:mixinTypes="mix:title"
                                  jcr:primaryType="jnt:translation"
                                  jcr:title="Portal Components"/>
-                        <currentUserBookmarks jcr:primaryType="jnt:currentUserBookmarks"
+               <currentUserBookmarks jcr:primaryType="jnt:currentUserBookmarks"
                                      numberOfBookmarksPerPage="10">
-                            <j:translation_en jcr:language="en"
+                  <j:translation_en jcr:language="en"
                                     jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="My Bookmarks"/>
-                            <j:translation_fr jcr:language="fr"
+                  <j:translation_fr jcr:language="fr"
                                     jcr:mixinTypes="mix:title"
                                     jcr:primaryType="jnt:translation"
                                     jcr:title="Mes Bookmarks"/>
-          </currentUserBookmarks>
-        </portal-components>
-      </contents>
-                <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
-        <files jcr:primaryType="jnt:folder">
-          <themes jcr:primaryType="jnt:folder">
-                            <default jcr:primaryType="jnt:folder"/>
-          </themes>
-                        <icons jcr:primaryType="jnt:folder"/>
-        </files>
-                    <contents jcr:primaryType="jnt:contentFolder"/>
-                    <user-bookmarks j:applyOn="jnt:user"
+               </currentUserBookmarks>
+            </portal-components>
+         </contents>
+         <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
+            <files jcr:primaryType="jnt:folder">
+               <themes jcr:primaryType="jnt:folder">
+                  <default jcr:primaryType="jnt:folder"/>
+               </themes>
+               <icons jcr:primaryType="jnt:folder"/>
+            </files>
+            <contents jcr:primaryType="jnt:contentFolder"/>
+            <user-bookmarks j:applyOn="jnt:user"
                             j:defaultTemplate="false"
                             j:hiddenTemplate="false"
                             j:priority="10"
                             jcr:primaryType="jnt:contentTemplate">
-                        <pagecontent j:id="user-bookmarks"
+               <pagecontent j:id="user-bookmarks"
                             jcr:mixinTypes="jmix:customSkin"
                             jcr:primaryType="jnt:contentList">
-                            <my-bookmarks j:skin="skins.box8"
+                  <my-bookmarks j:skin="skins.box8"
                                 j:style="blue"
                                 jcr:mixinTypes="jmix:skinnable jmix:style"
                                 jcr:primaryType="jnt:contentList">
-                                <j:translation_en jcr:language="en"
+                     <j:translation_en jcr:language="en"
                                        jcr:mixinTypes="mix:title"
                                        jcr:primaryType="jnt:translation"
                                        jcr:title="My Bookmarks"/>
-                                <j:translation_fr jcr:language="fr"
+                     <j:translation_fr jcr:language="fr"
                                        jcr:mixinTypes="mix:title"
                                        jcr:primaryType="jnt:translation"
                                        jcr:title="Mes Bookmarks"/>
-                                <currentUserBookmarks jcr:primaryType="jnt:currentUserBookmarks"
+                     <currentUserBookmarks jcr:primaryType="jnt:currentUserBookmarks"
                                            numberOfBookmarksPerPage="10">
-                                    <j:translation_en jcr:language="en"
+                        <j:translation_en jcr:language="en"
                                           jcr:mixinTypes="mix:title"
                                           jcr:primaryType="jnt:translation"
                                           jcr:title="My Bookmarks"/>
-                                    <j:translation_fr jcr:language="fr"
+                        <j:translation_fr jcr:language="fr"
                                           jcr:mixinTypes="mix:title"
                                           jcr:primaryType="jnt:translation"
                                           jcr:title="Mes Bookmarks"/>
-              </currentUserBookmarks>
-            </my-bookmarks>
-          </pagecontent>
-        </user-bookmarks>
-                <dashboard-modules-base j:view="dashboard"
-                                        jcr:mixinTypes="jmix:useUILocale"
-                                        jcr:primaryType="jnt:template">
-                    <favorites j:applyOn="jnt:user"
-                               j:defaultTemplate="false"
+                     </currentUserBookmarks>
+                  </my-bookmarks>
+               </pagecontent>
+            </user-bookmarks>
+            <dashboard-modules-base j:view="dashboard"
+                                    jcr:mixinTypes="jmix:useUILocale"
+                                    jcr:primaryType="jnt:template">
+               <favorites j:applyOn="jnt:user"
+                          j:defaultTemplate="false"
                           j:hiddenTemplate="false"
-                               j:titleKey="jnt_currentUserBookmarks"
-                               jcr:mixinTypes="jmix:rbTitle"
-                               jcr:primaryType="jnt:contentTemplate">
-                        <pagecontent jcr:primaryType="jnt:contentList">
-                                <currentUserBookmarks j:view="bootstrapBookmarks"
-                                                  jcr:mixinTypes="jmix:renderable"
+                          j:titleKey="jnt_currentUserBookmarks"
+                          jcr:mixinTypes="jmix:rbTitle"
+                          jcr:primaryType="jnt:contentTemplate">
+                  <pagecontent jcr:primaryType="jnt:contentList">
+                     <currentUserBookmarks j:view="bootstrapBookmarks"
+                                           jcr:mixinTypes="jmix:renderable"
                                            jcr:primaryType="jnt:currentUserBookmarks"
                                            numberOfBookmarksPerPage="10"/>
-                        </pagecontent>
-                    </favorites>
-                </dashboard-modules-base>
-            </templates>
-                
-        </bookmarks>
-    </modules>
+                  </pagecontent>
+               </favorites>
+            </dashboard-modules-base>
+         </templates>
+      </bookmarks>
+   </modules>
 </content>

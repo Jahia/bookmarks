@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "id": "updateBookmarkVisitorData",
+    "name": "Update Bookmark Visitor Data",
+    "description": "Update visitor data with Bookmark system name value"
+  },
+  "raiseEventOnlyOnceForProfile": false,
+  "raiseEventOnlyOnceForSession": false,
+  "condition": {
+    "type": "eventTypeCondition",
+    "parameterValues": {
+      "eventTypeId": "click"
+    },
+    "type": "eventPropertyCondition",
+    "parameterValues": {
+      "propertyName": "target.itemType",
+      "propertyValue": "bookmark",
+      "comparisonOperator": "equals"
+    }
+  },
+  "actions": [
+    {
+      "type": "updatePropertiesAction",
+      "parameterValues": {
+      }
+    }
+  ]
+}

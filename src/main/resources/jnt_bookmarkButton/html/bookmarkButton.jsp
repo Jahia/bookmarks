@@ -14,6 +14,9 @@
 <%--@elvariable id="renderContext" type="org.jahia.services.render.RenderContext"--%>
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
+<c:set var="nodeName" value="${currentNode.properties['j:nodename'].string}"/>
+<c:set var="targetId" value="${currentNode.properties['jcr:uuid'].string}"/>
+
 <c:if test="${renderContext.loggedIn}" >
 <form action="/" method="post" name="bookmark" id="bookmarkForm">
     <p>
@@ -31,7 +34,24 @@
             document.forms['bookmark'].elements['url'].value = document.location;
 
             $(document).ready(function () {
-                $("#bookmarkForm").submit(function () {
+                $("#bookmarkForm").submit(function (event) {
+                    if(window.wem){
+                        const clickEvent = window.wem.buildEvent('click',
+                            window.wem.buildTarget('${targetId}', 'bookmark'),
+                            window.wem.buildSourcePage()
+                        );
+                        clickEvent.properties={
+                            addToSet : {
+                                "properties.bookmarks":"${nodeName}"
+                            }
+                        }
+                        window.wem.collectEvent(clickEvent, function (xhr) {
+                            console.log("bookmark click event done");
+                        }, function (xhr) {
+                            console.error("oups something get wrong : ",xhr);
+                        })
+                    }
+
                     $.ajax({
                         type: "POST",
                         dataType: "json",
@@ -46,6 +66,7 @@
 
                         $('#bookmarkList${user.identifier}').load('<c:url value="${url.baseLive}${user.path}.bookmarks.html.ajax"/>');
                     });
+
                     return false;
                 });
             });
